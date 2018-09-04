@@ -5,13 +5,21 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
- *
- * @author student
+ *NOTES
+ * Could not test my code due to lack of time
+ * Have assumed a couple of things to make code simpler for now, mentioned at requisite place
+ * Encryption used is of the type if string is if string is "hell" and key is 2 then string becomes "jfnn"
+ * that is shifting 2 spaces right, and similarly subtract for decryption
+ * could not implement chain functions ie 8 and 9 as couldn't understand meaning of chain
+ * 
+ * genesisnode belongs to super user and not the end user
+ * 
  */
 public class Record {
     
     public Record(){
        globalNodeNumber = 1;
+       globalOwnerNumber = 1;
     }
     
     public class Node{
@@ -42,7 +50,12 @@ public class Record {
     public class Owner{
         int id;
         String name;
-
+        public Owner(String name){
+            this.name = name;
+            this.id = globalOwnerNumber;
+            globalOwnerNumber++;
+        }
+        
         @Override
         public boolean equals(Object obj) {
             Owner other = (Owner)obj;
@@ -60,6 +73,7 @@ public class Record {
         String hashValue; 
     }
     static int globalNodeNumber;
+    static int globalOwnerNumber;
     Node genesisNode;
     
     private String makeStringForData(int id,double value,String ownerName){
